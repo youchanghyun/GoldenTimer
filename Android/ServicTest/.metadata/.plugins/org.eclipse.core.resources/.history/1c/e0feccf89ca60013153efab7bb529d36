@@ -1,0 +1,41 @@
+package com.example.servicetest;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.widget.Toast;
+
+public class LocalService extends Service {
+	private int callingCount;
+
+	// 서비스 생성시 1번만 실행
+	public void onCreate() {
+		super.onCreate();
+
+		Toast.makeText(getBaseContext(), "Service is Created", Toast.LENGTH_SHORT).show();
+	}
+
+	// 서비스가 호출될때마다 매번 실행(onResume()과 비슷)
+	public int onStartCommand(Intent intent, int flags, int startId) {
+
+		int i = super.onStartCommand(intent, flags, startId);
+		Toast.makeText(getBaseContext(), "Service is Started", Toast.LENGTH_SHORT).show();
+
+		Toast.makeText(getBaseContext(),
+				"Called Count is :" + String.valueOf(callingCount), Toast.LENGTH_SHORT).show();
+		callingCount++;
+
+		return i;
+	}
+
+	// 서비스가 종료될때 실행
+	public void onDestroy() {
+		super.onDestroy();
+		Toast.makeText(getBaseContext(), "Service is Destroied", Toast.LENGTH_SHORT).show();
+	}
+
+	public IBinder onBind(Intent intent) {
+		return null;
+	}
+
+}

@@ -1,0 +1,162 @@
+package com.example.googlemaptest;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
+
+
+
+public class Data {
+	
+	double _lat;
+	double _lng;
+	int id;
+	int month;
+	int day;
+	int hour;
+	int minute;
+	int second;
+	int num_db=0; // 인스턴스 개수
+	
+	DB_OPEN db_open;
+	SQLiteDatabase db;
+	
+	public Data() {
+		_lat = 0;
+		_lng =0;
+		id=0;
+		month =3;
+		day = 28;
+		hour = 10;
+		minute = 0;
+		second = 0;
+		
+	}
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// TODO Auto-generated method stub		
+		db_open = new DB_OPEN(this);
+		db = db_open.getWritableDatabase();
+	}
+	public void setData(Data data){
+		// DB에 저장된 value들 받아오기
+				Cursor c_id = db.rawQuery("SELECT user_id FROM sensor_data WHERE day ="
+						+ currentDay, null);
+				c_id.moveToFirst();
+				c_id.getCount();
+
+				for (int i = 0; i < c_id.getCount(); i++) {
+					data.add(new Data());
+				}
+
+				for (int i = 0; i < c_id.getCount(); i++) {
+					data.get(i).id = c_id.getInt(0);
+					Log.v(TAG, "id" + " " + data.get(i).id);
+					c_id.moveToNext();
+				}
+				Log.v(TAG, "처음 id 받아오기");
+
+				Cursor c_lat = db.rawQuery(
+						"SELECT latitude FROM sensor_data WHERE day =" + currentDay,
+						null);
+				c_lat.moveToFirst();
+				c_lat.getCount();
+
+				for (int i = 0; i < c_lat.getCount(); i++) {
+					data.get(i)._lat = c_lat.getDouble(0);
+					Log.v(TAG, "lat[" + i + "] : " + " " + data.get(i)._lat);
+					c_lat.moveToNext();
+				}
+				Log.v(TAG, "처음 lat 받아오기");
+
+				Cursor c_lng = db.rawQuery(
+						"SELECT longitude FROM sensor_data WHERE day =" + currentDay,
+						null);
+				c_lng.moveToFirst();
+				c_lng.getCount();
+
+				for (int i = 0; i < c_lng.getCount(); i++) {
+					data.get(i)._lng = c_lng.getDouble(0);
+					Log.v(TAG, "lng[" + i + "] : " + " " + data.get(i)._lng);
+					c_lng.moveToNext();
+				}
+				Log.v(TAG, "처음 lng 받아오기");
+
+				Log.e(TAG, c_lng.getCount() + "");
+
+				for (int i = 0; i < c_lng.getCount(); i++) {
+					Log.e(TAG,
+							i + " id : " + data.get(i).id + " " + "lat[i] : "
+									+ data.get(i)._lat + " " + "lng[i] : "
+									+ data.get(i)._lng);
+				}
+
+				num_db = c_lng.getCount();
+
+				Cursor c_month = db.rawQuery(
+						"SELECT month FROM sensor_data WHERE day =" + currentDay, null);
+				c_month.moveToFirst();
+				c_month.getCount();
+
+				for (int i = 0; i < c_month.getCount(); i++) {
+					data.get(i).month = c_month.getInt(0);
+					Log.v(TAG, "month[" + i + "] : " + " " + data.get(i).month);
+					c_month.moveToNext();
+				}
+				Log.v(TAG, "처음 month 받아오기");
+
+				Cursor c_day = db.rawQuery("SELECT day FROM sensor_data WHERE day ="
+						+ currentDay, null);
+				c_day.moveToFirst();
+				c_day.getCount();
+
+				for (int i = 0; i < c_day.getCount(); i++) {
+					data.get(i).day = c_day.getInt(0);
+					Log.v(TAG, "day[" + i + "] : " + " " + data.get(i).day);
+					c_day.moveToNext();
+				}
+				Log.v(TAG, "처음 day 받아오기");
+
+				Cursor c_hour = db.rawQuery("SELECT hour FROM sensor_data WHERE day ="
+						+ currentDay, null);
+				c_hour.moveToFirst();
+				c_hour.getCount();
+
+				for (int i = 0; i < c_hour.getCount(); i++) {
+					data.get(i).hour = c_hour.getInt(0);
+					Log.v(TAG, "hour[" + i + "] : " + " " + data.get(i).hour);
+					c_hour.moveToNext();
+				}
+				Log.v(TAG, "처음 hour 받아오기");
+
+				Cursor c_minute = db
+						.rawQuery("SELECT minute FROM sensor_data WHERE day ="
+								+ currentDay, null);
+				c_minute.moveToFirst();
+				c_minute.getCount();
+
+				for (int i = 0; i < c_minute.getCount(); i++) {
+					data.get(i).minute = c_minute.getInt(0);
+					Log.v(TAG, "minute[" + i + "] : " + " " + data.get(i).minute);
+					c_minute.moveToNext();
+				}
+				Log.v(TAG, "처음 minute 받아오기");
+
+				Cursor c_second = db
+						.rawQuery("SELECT second FROM sensor_data WHERE day ="
+								+ currentDay, null);
+				c_second.moveToFirst();
+				c_second.getCount();
+
+				for (int i = 0; i < c_second.getCount(); i++) {
+					data.get(i).second = c_second.getInt(0);
+					Log.v(TAG, "second[" + i + "] : " + " " + data.get(i).second);
+					c_second.moveToNext();
+				}
+				Log.v(TAG, "처음 second 받아오기");
+	}
+	public int getNumDb(){
+		return num_db;
+	}
+}

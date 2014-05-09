@@ -1,0 +1,219 @@
+package com.example.googlemaptest;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+public class MapActivity extends FragmentActivity {
+
+	public int count = 0; // 몇번째 정보인지 저장하는 index
+	LocationManager manager;
+	Location loca;
+	public GoogleMap mGoogleMap;
+
+	PolylineOptions op_red = new PolylineOptions().color(Color.RED);
+	PolylineOptions op_blue = new PolylineOptions().color(Color.BLUE);
+	Polyline polyline;
+	
+	private static final String TAG = "LogTest";
+
+	MyLocationListener listener = new MyLocationListener();
+
+	public ArrayList<LatLng> list_LatLng = new ArrayList<LatLng>();
+	// public ArrayList<MarkerOptions> marker = new ArrayList<MarkerOptions>();
+
+	LatLng loc = new LatLng(37.58660, 126.94352); // LatLng는 위도 경도 갖는 클래스
+	CameraPosition cp = new CameraPosition.Builder().target((loc)).zoom(18)
+			.build();
+	MarkerOptions marker;
+
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_map);
+
+		mGoogleMap = ((SupportMapFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.map)).getMap(); // 화면에 구글맵 표시
+
+		mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp)); // 지정위치로
+																				// 이동
+		/*
+		if (count % 2 == 0) {
+			polyline = mGoogleMap.addPolyline(op_red); // marker마다
+																// 선이어주는 함수
+		}
+
+		else {
+			polyline = mGoogleMap.addPolyline(op_blue); // marker마다
+																	// 선이어주는 함수
+		}*/
+		
+		// Toast.makeText(MapActivity.this, findAddress(38.925322, -104.792510),
+		// Toast.LENGTH_SHORT).show();
+
+		// mGoogleMap.addMarker(marker); // 지정위치에 마커 추가
+		// TODO Auto-generated method stub
+		mGoogleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+				// TODO Auto-generated method stub
+
+				Toast.makeText(MapActivity.this, " " + marker.getId(),
+						Toast.LENGTH_SHORT).show();
+
+				return true;
+			}
+		});
+		getMyLocation();
+	}
+
+	private void getMyLocation() {
+		if (manager == null) {
+			manager = (LocationManager) this
+					.getSystemService(Context.LOCATION_SERVICE);
+		}
+		// provider 기지국||GPS 를 통해서 받을건지 알려주는 Stirng 변수
+		// minTime 최소한 얼마만의 시간이 흐른후 위치정보를 받을건지 시간간격을 설정 설정하는 변수
+		// minDistance 얼마만의 거리가 떨어지면 위치정보를 받을건지 설정하는 변수
+		// manager.requestLocationUpdates(provider, minTime, minDistance,
+		// listener);
+
+		// 10초
+		long minTime = 20000;
+
+		// 거리는 0으로 설정
+		// 그래서 시간과 거리 변수만 보면 움직이지않고 10초뒤에 다시 위치정보를 받는다
+		float minDistance = 0;
+
+		Criteria criteria = new Criteria();
+		// criteria.setAccuracy(Criteria.ACCURACY_FINE);
+
+		String provider = manager.getBestProvider(criteria, true);
+
+		 Toast.makeText(MapActivity.this, provider,
+		 Toast.LENGTH_SHORT).show();
+
+		manager.requestLocationUpdates(provider, minTime, minDistance, listener);
+		loca = manager.getLastKnownLocation(provider);
+
+		// Toast.makeText(MapActivity.this, "위치를 요청했습니다", Toast.LENGTH_SHORT)
+		// .show();
+	}
+
+	class MyLocationListener implements LocationListener {
+
+		// 위치정보는 아래 메서드를 통해서 전달된다.
+		@Override
+		public void onLocationChanged(Location location) {
+			double latitude = location.getLatitude();
+			double longitude = location.getLongitude();
+
+			list_LatLng.add(new LatLng(latitude, longitude));
+
+			String strr = findAddress(latitude, longitude);
+
+			Toast.makeText(MapActivity.this, strr, Toast.LENGTH_SHORT).show();
+
+			Toast.makeText(MapActivity.this,
+					latitude + " " + longitude + " " + count,
+					Toast.LENGTH_SHORT).show();
+			CameraPosition cp = new CameraPosition.Builder()
+					.target((list_LatLng.get(count))).zoom(17).build();
+
+			mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+			marker = new MarkerOptions().position(list_LatLng.get(count))
+					.title("Here"); // marker 찍는것
+
+			mGoogleMap.addMarker(marker); // 지정위치에 마커 추가
+
+			if (count % 2 == 0) {
+				op_red.add(list_LatLng.get(count));
+				op_blue.add(list_LatLng.get(count));
+				mGoogleMap.addPolyline(op_blue);
+				mGoogleMap.addPolyline(op_red);
+				Log.e(TAG,"red");
+			} else {
+				op_blue.add(list_LatLng.get(count));
+				op_red.add(list_LatLng.get(count));
+				mGoogleMap.addPolyline(op_red);
+				mGoogleMap.addPolyline(op_blue);
+				Log.e(TAG,"blue");
+			}
+			count++;
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+
+		}
+
+	}
+
+	private String findAddress(double lat, double lng) {
+		String bf = new String();
+		Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
+		List<Address> address = null;
+		Log.v(TAG, lat + " " + lng);
+		try {
+			// 세번째 인수는 최대결과값인데 하나만 리턴받도록 설정했다
+			address = geocoder.getFromLocation(lat, lng, 1);
+			// 설정한 데이터로 주소가 리턴된 데이터가 있으면
+			Log.e(TAG, "try");
+		} catch (IOException e) {
+			// Toast.makeText(this, "주소취득 실패", Toast.LENGTH_LONG).show();
+			Log.e(TAG, "catch");
+			e.printStackTrace();
+		}
+
+		if (address == null) {
+			Log.e(TAG, "null값 반환");
+			return null;
+		}
+
+		if (address.size() > 0) {
+			Address addr = address.get(0);
+			bf = addr.getCountryName() + " " + " " + addr.getLocality() + " "
+					+ addr.getThoroughfare() + " " + addr.getFeatureName();
+			Log.e(TAG, bf);
+		}
+
+		return bf;
+	}
+}

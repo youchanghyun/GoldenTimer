@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/statistics_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="하루" />
+
+        <Button
+            android:id="@+id/statistics_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1주일" />
+
+        <Button
+            android:id="@+id/statistics_btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1달" />
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:flipInterval="500" >
+
+        <LinearLayout
+            android:id="@+id/page1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#A4FFFF"
+                android:gravity="center"
+                android:text="하루 평균입니다." />
+            <ImageView
+                android:id="@+id/imageview1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/suzy4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/page2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="invisible"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#A4FFFF"
+                android:gravity="center"
+                android:text="1주일 평균입니다." />
+            <ImageView
+                android:id="@+id/imageview2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/suzy5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/page3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="invisible"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#A4FFFF"
+                android:gravity="center"
+                android:text="1달 평균입니다." />
+
+            <ImageView
+                android:id="@+id/imageview3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/suzy6"/>
+
+        </LinearLayout>
+    </ViewFlipper>
+
+</LinearLayout>

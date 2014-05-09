@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.google.android.gms.maps.model.CameraPosition.Builder"/>
+<fullyQualifiedTypeName name="com.google.android.gms.maps.GoogleMap.OnMarkerClickListener"/>
+<fullyQualifiedTypeName name="android.location.LocationListener"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.R.drawable"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.MapActivity"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.R"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.R.string"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.R.id"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.MainActivity"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.R.layout"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.example.googlemaptest.MapActivity.MyLocationListener"/>
+</qualifiedTypeNameHistroy>

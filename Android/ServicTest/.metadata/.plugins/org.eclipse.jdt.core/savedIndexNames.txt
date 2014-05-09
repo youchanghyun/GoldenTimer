@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\Users\Ã¢Çö\Downloads\Android\ServicTest\.metadata\.plugins\org.eclipse.jdt.core
+614093619.index
+391230287.index
+3100202086.index
