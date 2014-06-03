@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/demo_background2"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/classify_motion_btn"
+        android:layout_width="75dp"
+        android:layout_height="35dp"
+        android:background="@drawable/detect_motion_btn_selector"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:id="@+id/motion_graph"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>
