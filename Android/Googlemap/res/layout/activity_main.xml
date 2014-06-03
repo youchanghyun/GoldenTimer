@@ -1,24 +1,65 @@
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tabHost"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background4"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:layout_height="0dp"
+        android:layout_weight="5.5"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp"
+        android:orientation="horizontal" >
 
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/start_btn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/start_btn_selector" />
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-        </FrameLayout>
+        <Button
+            android:layout_marginLeft="10dp"
+            android:id="@+id/save_my_loc_btn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/save_my_loc_btn_selector" />
+
+        <Button
+            android:id="@+id/demo_btn"
+            android:layout_marginLeft="10dp"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/demo_btn_selector" />
     </LinearLayout>
 
-</TabHost>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/menu_map_btn"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:background="@drawable/menu_map_btn_selector" />
+
+        <Button
+            android:id="@+id/menu_calendar_btn"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/menu_calendar_btn_selector" />
+
+        <Button
+            android:id="@+id/menu_statistics_btn"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/menu_statistics_btn_selector" />
+    </LinearLayout>
+
+</LinearLayout>

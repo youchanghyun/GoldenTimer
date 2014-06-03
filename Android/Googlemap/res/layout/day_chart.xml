@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/day_chart_background"
+    >
+    
+    <TextView
+        android:id="@+id/graph_title_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:gravity="center"
+        android:text="일간 행동 분석"
+        android:textSize="20dp"
+        android:background="#7b5f63"
+        android:textStyle="bold"/>
+    
+    <LinearLayout
+        android:id="@+id/graph_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/graph_title_1"
+        android:padding="10dp"
+        android:orientation="vertical" />
+
+</RelativeLayout>

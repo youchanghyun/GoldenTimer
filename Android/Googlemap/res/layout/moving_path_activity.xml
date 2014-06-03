@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+            android:background="@drawable/moving_path_background"
+    android:orientation="vertical">
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="이동 경로 리스트"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <ListView
+        android:layout_marginTop="3dp"
+        android:id="@+id/path_list"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
